@@ -1,6 +1,16 @@
 <?php
-mysql_connect("mysql", "myecp", "myecp");
-pg_connect("host=postgresql dbname=myecp user=myecp password=myecp");
+
+$mysql =  new PDO(
+    'mysql:host=mysql;dbname=myecp',
+    'myecp',
+    'myecp'
+);
+
+$psql =  new PDO(
+    'pgsql:host=postgres;dbname=myecp',
+    'myecp',
+    'myecp'
+);
 
 echo phpinfo();
 

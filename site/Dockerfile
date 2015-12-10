@@ -8,9 +8,12 @@ RUN apt-get update && \
     libicu-dev \
     libldb-dev \
     libldap2-dev \
+    libmagic-dev \
+    libcurl4-gnutls-dev \
+    libcurl3 \
     libmcrypt-dev
 
-RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && docker-php-ext-install pdo pdo_pgsql pgsql pdo_mysql mcrypt mysql mysqli intl ldap pgsql sqlite3
+RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && docker-php-ext-install pdo_pgsql pdo_mysql mcrypt intl ldap curl
 
 # Workaround for write permission on write to MacOS X volumes
 # See https://github.com/boot2docker/boot2docker/pull/534
