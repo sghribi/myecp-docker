@@ -1,1 +1,3 @@
 .idea/
+logs/apache2/
+!logs/apache2/.gitleep

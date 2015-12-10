@@ -26,12 +26,18 @@ RUN update-ca-certificates
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Configure timezone
+RUN sed -ie 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php5/cli/php.ini
+RUN sed -ie 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/Paris/g' /etc/php5/apache2/php.ini
+
 # Fix write rights for Mac
 RUN usermod -u 1000 www-data
 
-# Run Apache2
-CMD ["apache2", "-D", "FOREGROUND"]
-
+# Expose apache2 ports
 EXPOSE 80
 EXPOSE 443
+
+# Run Apache2
+CMD /usr/sbin/apache2ctl -D FOREGROUND
+
 

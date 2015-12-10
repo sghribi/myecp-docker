@@ -21,8 +21,11 @@ apache:
    links:
      - mysql
      - postgres
-   volumes:
-     - ./logs/apache2/:/var/log/apache2
+#   volumes:
+#     - ./logs/apache2/:/var/log/apache2
+   ports:
+     - "5080:80"
+     - "5443:443"
 
 mysql:
   image: mysql:5.6
