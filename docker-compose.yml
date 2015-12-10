@@ -6,6 +6,9 @@ site:
    - ./code/:/var/www/html
   links:
    - mysql
+   - postgres
+  environment:
+     - SYMFONY_ENV=dev
 
 phpmyadmin:
    image: corbinu/docker-phpmyadmin
@@ -24,3 +27,10 @@ mysql:
      - MYSQL_DATABASE=myecp
      - MYSQL_USER=myecp
      - MYSQL_PASSWORD=myecp
+
+postgres:
+  image: postgres:9
+  environment:
+     - POSTGRES_PASSWORD=myecp
+     - POSTGRES_USER=myecp
+
