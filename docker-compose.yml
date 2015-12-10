@@ -1,24 +1,28 @@
-site:
-  build: site
-  ports :
-   - "8080:80"
+code:
+  image: debian:jessie
   volumes:
    - ./code/:/var/www/html
-  links:
-   - mysql
-   - postgres
-  environment:
-     - SYMFONY_ENV=dev
+  tty: true
 
-phpmyadmin:
-   image: corbinu/docker-phpmyadmin
-   ports :
-    - "8081:80"
-   environment:
-    - MYSQL_USERNAME=root
-    - MYSQL_PASSWORD=password
+#phpmyadmin:
+#   image: corbinu/docker-phpmyadmin
+#   ports :
+#    - "8081:80"
+#   environment:
+#    - MYSQL_USERNAME=root
+#    - MYSQL_PASSWORD=password
+#   links:
+#    - mysql
+
+apache:
+   build: apache
+   volumes_from:
+     - code
    links:
-    - mysql
+     - mysql
+     - postgres
+   volumes:
+     - ./logs/apache2/:/var/log/apache2
 
 mysql:
   image: mysql:5.6
